@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	private int score = 0;
 	private Rigidbody rb;
 	// Use this for initialization
 	void Start () {
