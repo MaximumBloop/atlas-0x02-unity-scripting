@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -8,13 +9,14 @@ public class PlayerController : MonoBehaviour {
 	public int health = 5;
 	private int score = 0;
 	private Rigidbody rb;
+	private Scene currentScene;
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (Input.GetKey(KeyCode.W))
 		{
 			rb.AddForce(Vector3.forward * speed - rb.velocity);
@@ -29,6 +31,15 @@ public class PlayerController : MonoBehaviour {
 			rb.AddForce(Vector3.left * speed - rb.velocity);
 		} else {
 			rb.velocity = new Vector3(0, 0, 0);
+		}
+	}
+
+	void Update() {
+		if (health == 0)
+		{
+			Debug.Log("Game Over!");
+			currentScene = SceneManager.GetActiveScene();
+			SceneManager.LoadScene(currentScene.name);
 		}
 	}
 
