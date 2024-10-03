@@ -45,5 +45,9 @@ public class PlayerController : MonoBehaviour {
 			health -= 1;
 			Debug.Log("Health: " + health);
 		}
+		if (other.gameObject.tag == "Goal")
+		{
+			Debug.Log("You win!");
+		}
 	}
 }
