@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public int health = 5;
 	private int score = 0;
 	private Rigidbody rb;
 	// Use this for initialization
@@ -28,6 +29,21 @@ public class PlayerController : MonoBehaviour {
 			rb.AddForce(Vector3.left * speed - rb.velocity);
 		} else {
 			rb.velocity = new Vector3(0, 0, 0);
+		}
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Pickup")
+		{
+			score += 1;
+			Debug.Log("Score: " + score);
+			Destroy(other.gameObject);
+		}
+		if (other.gameObject.tag == "Trap")
+		{
+			health -= 1;
+			Debug.Log("Health: " + health);
 		}
 	}
 }
